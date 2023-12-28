@@ -1,6 +1,9 @@
 import { WebSocketServer, WebSocket, Data, CONNECTING } from 'ws';
 
-type ExtendedWebSocket = WebSocket & { name?: string; otherName?: string };
+type ExtendedWebSocket = WebSocket & {
+  name?: string | null;
+  otherName?: string | null;
+};
 
 enum types {
   MESSAGE,
@@ -9,6 +12,7 @@ enum types {
   OFFER,
   ANSWER,
   CANDIDATE,
+  LEAVE,
 }
 
 type DataType = {
@@ -25,7 +29,6 @@ const users: Record<string, ExtendedWebSocket> = {};
 wss.on('connection', (socket: ExtendedWebSocket) => {
   socket.on('message', (msg) => {
     const { type, data }: DataType = JSON.parse(msg.toString());
-
     switch (type) {
       case types.LOGIN:
         if (users[data.name]) {
@@ -34,7 +37,7 @@ wss.on('connection', (socket: ExtendedWebSocket) => {
             msg: 'The username is already exists.',
           });
         } else {
-          users[data.user] = socket;
+          users[data.name] = socket;
           socket.name = data.name;
           sendWS(socket, types.LOGIN, {
             success: true,
@@ -66,6 +69,20 @@ wss.on('connection', (socket: ExtendedWebSocket) => {
         break;
       case types.CANDIDATE:
         console.log('Sending Candidate to: ', data.name);
+        var otherSocket = users[data.name];
+
+        if (otherSocket != null) {
+          sendWS(otherSocket, types.CANDIDATE, {
+            candidate: data.candidate,
+          });
+        }
+        break;
+      case types.LEAVE:
+        console.log('Disconnecting from ', data.name);
+        var otherSocket = users[data.name];
+        if (otherSocket != null) {
+          sendWS(otherSocket, types.LEAVE, {});
+        }
         break;
       default:
         console.log('Command not found');
@@ -75,6 +92,15 @@ wss.on('connection', (socket: ExtendedWebSocket) => {
   socket.on('close', () => {
     if (socket.name) {
       delete users[socket.name];
+
+      if (socket.otherName) {
+        console.log('Disconnecting from ', socket.otherName);
+        const otherSocket = users[socket.otherName];
+        socket.otherName = null;
+        if (otherSocket != null) {
+          sendWS(otherSocket, types.LEAVE, {});
+        }
+      }
     }
   });
 });

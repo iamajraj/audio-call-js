@@ -11,7 +11,7 @@
       <div
         class="w-full max-w-[600px] min-h-[400px] border shadow-lg rounded-lg">
         <div
-          class="p-10 flex flex-col justify-center items-center h-full hidden"
+          class="p-10 flex flex-col justify-center items-center h-full"
           id="loginScreen">
           <h2 class="italic font-bold text-4xl">
             Hi!
@@ -30,7 +30,7 @@
           </button>
         </div>
         <div
-          class="p-10 flex flex-col justify-center items-center h-full"
+          class="p-10 hidden flex-col justify-center items-center h-full"
           id="callScreen">
           <h2 class="italic font-bold text-4xl">
             Welcome!
@@ -52,7 +52,6 @@
               type="text"
               placeholder="Enter the user username"
               class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
-            <p id="callError" class="text-red-500 text-sm py-2"></p>
             <button
               id="callBtn"
               class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
