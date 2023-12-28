@@ -1,0 +1,36 @@
+{
+
+  "name": "server",
+
+  "version": "1.0.0",
+
+  "main": "index.js",
+
+  "devDependencies": {
+
+    "@types/ws": "^8.5.10"
+
+  },
+
+  "scripts": {
+
+    "dev": "nodemon --exec ts-node server.ts"
+
+  },
+
+  "keywords": [],
+
+  "author": "",
+
+  "license": "ISC",
+
+  "description": "",
+
+  "dependencies": {
+
+    "ws": "^8.16.0"
+
+  }
+
+}
+

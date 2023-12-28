@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Call</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+  <body>
+    <div class="h-full w-full flex items-center justify-center">
+      <div
+        class="w-full max-w-[600px] min-h-[400px] border shadow-lg rounded-lg">
+        <div
+          class="p-10 flex flex-col justify-center items-center h-full hidden"
+          id="loginScreen">
+          <h2 class="italic font-bold text-4xl">
+            Hi!
+            <span class="not-italic text-2xl">Login to do the Audio Call</span>
+          </h2>
+          <input
+            id="username"
+            type="text"
+            placeholder="Enter a username"
+            class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
+          <p id="loginError" class="text-red-500 text-sm py-2"></p>
+          <button
+            id="joinBtn"
+            class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
+            Join
+          </button>
+        </div>
+        <div
+          class="p-10 flex flex-col justify-center items-center h-full"
+          id="callScreen">
+          <h2 class="italic font-bold text-4xl">
+            Welcome!
+            <span class="not-italic text-2xl">You can now do Audio Calls</span>
+          </h2>
+          <div class="gap-5">
+            <div class="flex flex-col items-center gap-2">
+              <p>You</p>
+              <audio autoplay controls id="localAudio"></audio>
+            </div>
+            <div class="flex flex-col items-center gap-2 mt-5">
+              <p>Remote</p>
+              <audio autoplay controls id="remoteAudio"></audio>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 mt-5">
+            <input
+              id="remoteUsername"
+              type="text"
+              placeholder="Enter the user username"
+              class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
+            <p id="callError" class="text-red-500 text-sm py-2"></p>
+            <button
+              id="callBtn"
+              class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
+              Call
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
