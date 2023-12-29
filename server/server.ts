@@ -13,6 +13,7 @@ enum types {
   ANSWER,
   CANDIDATE,
   LEAVE,
+  ACTIVE_USERS,
 }
 
 type DataType = {
@@ -42,6 +43,11 @@ wss.on('connection', (socket: ExtendedWebSocket) => {
           sendWS(socket, types.LOGIN, {
             success: true,
             msg: 'User has been successfully logged in!',
+          });
+          Object.values(users).forEach((user) => {
+            sendWS(user, types.ACTIVE_USERS, {
+              users: Object.keys(users),
+            });
           });
         }
         break;

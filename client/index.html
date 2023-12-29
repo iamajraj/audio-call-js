@@ -7,16 +7,15 @@
     <script type="module" src="/src/main.ts" defer></script>
   </head>
   <body>
-    <div class="h-full w-full flex items-center justify-center">
-      <div
-        class="w-full max-w-[600px] min-h-[400px] border shadow-lg rounded-lg">
+    <div
+      class="h-full w-full flex items-center justify-center bg-gradient-to-b to-pink-700 from-indigo-800">
+      <div class="shadow-lg rounded-lg bg-white/30 backdrop-blur-3xl">
         <div
           class="p-10 flex flex-col justify-center items-center h-full"
           id="loginScreen">
-          <h2 class="italic font-bold text-4xl">
-            Hi!
-            <span class="not-italic text-2xl">Login to do the Audio Call</span>
-          </h2>
+          <p class="not-italic text-2xl text-white">
+            Login to do the Audio Call
+          </p>
           <input
             id="username"
             type="text"
@@ -26,37 +25,47 @@
           <button
             id="joinBtn"
             class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
-            Join
+            Login
           </button>
         </div>
-        <div
-          class="p-10 hidden flex-col justify-center items-center h-full"
-          id="callScreen">
-          <h2 class="italic font-bold text-4xl">
-            Welcome!
-            <span class="not-italic text-2xl">You can now do Audio Calls</span>
-          </h2>
-          <div class="gap-5">
-            <div class="flex flex-col items-center gap-2">
-              <p>You</p>
-              <audio autoplay controls id="localAudio"></audio>
+        <div class="p-10 hidden gap-10 h-full" id="callScreen">
+          <div class="flex flex-col justify-center items-center">
+            <p class="not-italic text-2xl text-white">
+              You can now do Audio Calls
+            </p>
+            <div class="gap-5 mt-5">
+              <div class="flex flex-col items-center gap-2">
+                <p class="text-white font-bold text-sm">You</p>
+                <audio autoplay controls id="localAudio"></audio>
+              </div>
+              <div class="flex flex-col items-center gap-2 mt-5">
+                <p class="text-white font-bold text-sm">Remote</p>
+                <audio autoplay controls id="remoteAudio"></audio>
+              </div>
             </div>
-            <div class="flex flex-col items-center gap-2 mt-5">
-              <p>Remote</p>
-              <audio autoplay controls id="remoteAudio"></audio>
+            <div class="flex items-center gap-4 mt-5">
+              <input
+                id="remoteUsername"
+                type="text"
+                placeholder="Enter the user username"
+                class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
+              <button
+                id="callBtn"
+                class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
+                Call
+              </button>
             </div>
           </div>
-          <div class="flex items-center gap-4 mt-5">
-            <input
-              id="remoteUsername"
-              type="text"
-              placeholder="Enter the user username"
-              class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
-            <button
-              id="callBtn"
-              class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
-              Call
-            </button>
+          <div>
+            <p class="text-white">Online users.</p>
+            <ul
+              id="onlineUsers"
+              class="mt-2 flex flex-col items-center gap-2 border-t pt-3">
+              <li class="online-users-wrapper">
+                <div class="online-signal"></div>
+                <span>Raj</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

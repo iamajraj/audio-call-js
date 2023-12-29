@@ -14,9 +14,11 @@ const remoteUsernameInput = document.getElementById(
 const localAudio = document.getElementById('localAudio') as HTMLAudioElement;
 const remoteAudio = document.getElementById('remoteAudio') as HTMLAudioElement;
 
-const ws = new WebSocket('ws://localhost:8080');
+const onlineUsersContainer = document.getElementById('onlineUsers');
 
-var name: string;
+const ws = new WebSocket('ws://192.168.0.112:8080');
+
+let name: string;
 var connectedUser: string | null;
 
 var yourConn: any | null;
@@ -30,6 +32,7 @@ enum types {
   ANSWER,
   CANDIDATE,
   LEAVE,
+  ACTIVE_USERS,
 }
 
 type DataType = {
@@ -79,10 +82,27 @@ ws.onmessage = (event) => {
     case types.LEAVE:
       handleLeave();
       break;
+    case types.ACTIVE_USERS:
+      handleActiveUsers(data.users);
+      break;
     default:
       console.log('Command is not valid.');
   }
 };
+
+function handleActiveUsers(users: string[]) {
+  onlineUsersContainer!.innerHTML = '';
+  const elements = users.map((user) => {
+    user = user === name ? 'You' : user;
+    return `
+    <li class="online-users-wrapper">
+        <div class="online-signal"></div>
+        <span>${user}</span>
+    </li>
+    `;
+  });
+  onlineUsersContainer!.innerHTML = elements.join('');
+}
 
 function handleLogin(success: boolean, msg: string) {
   if (success) {
@@ -131,9 +151,9 @@ function handleLogin(success: boolean, msg: string) {
 
 joinBtn?.addEventListener('click', (_) => {
   name = usernameInput.value.trim();
-  if (!usernameInput.value.trim()) return;
+  if (!name) return;
   sendWS(types.LOGIN, {
-    name: usernameInput.value,
+    name: name,
   });
 });
 
