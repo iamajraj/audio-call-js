@@ -119,6 +119,21 @@ function handleLogin(success: boolean, msg: string) {
 
         localAudio.srcObject = stream;
 
+        // const audioCtx = new AudioContext();
+        // const analyser = audioCtx.createAnalyser();
+        // analyser.fftSize = 256;
+        // const audioSrc = audioCtx.createMediaElementSource(localAudio);
+        // audioSrc.connect(analyser);
+        // analyser.connect(audioCtx.destination);
+
+        // const dataArray = new Float32Array(256);
+        // analyser.getFloatFrequencyData(dataArray);
+        // setInterval(() => {
+        //   const zeros = dataArray.filter((v) => v === 0);
+        //   const barWidth = dataArray.length - zeros.length;
+        //   console.log(barWidth);
+        // }, 1000);
+
         const config = {
           iceServers: [
             {

@@ -26,7 +26,7 @@
             id="loggedProfile"></p>
         </div>
       </div>
-      <div class="ml-44 w-max flex-col mt-52 hidden" id="loginScreen">
+      <div class="ml-44 w-max hidden flex-col mt-52" id="loginScreen">
         <h1 class="text-4xl leading-[50px]">
           Premium audio meetings.<br />Now free for everyone
         </h1>
@@ -56,19 +56,36 @@
       <!-- Call Screen -->
       <div class="px-20 pt-10 pb-32 flex flex-col gap-5 h-full" id="callScreen">
         <div class="flex gap-10 flex-1">
-          <div class="flex w-[80%]">
-            <audio autoplay controls id="localAudio" hidden></audio>
-            <audio autoplay controls id="remoteAudio" hidden></audio>
+          <div
+            class="flex gap-10 w-[80%] border-2 rounded-lg items-center justify-center">
             <div
-              class="w-full border-2 rounded-lg flex items-center justify-center">
+              class="flex flex-col border-[4px] p-10 rounded-lg gap-4 items-center justify-center">
               <p
-                class="w-32 h-32 rounded-full border-2 flex items-center justify-center text-4xl">
-                A
+                class="w-32 h-32 rounded-full flex items-center justify-center border-2">
+                You
               </p>
+              <audio autoplay controls id="localAudio"></audio>
             </div>
+            <div
+              class="flex flex-col border-[4px] p-10 rounded-lg gap-4 items-center justify-center">
+              <p
+                class="w-32 h-32 rounded-full flex items-center justify-center border-2">
+                Remote
+              </p>
+              <audio autoplay controls id="remoteAudio"></audio>
+            </div>
+            <!-- <div
+              class="w-full border-2 rounded-lg flex items-center justify-center">
+              <div
+                class="relative w-32 h-32 rounded-full border-2 flex items-center justify-center text-4xl bg-white">
+                <span>A</span>
+                <div
+                  class="absolute w-full h-full bg-red-500 rounded-full -z-[1] scale-150 opacity-20"></div>
+              </div>
+            </div> -->
           </div>
           <div class="w-[20%] flex flex-col border-2 rounded-lg p-4">
-            <p>Active.</p>
+            <p>IN MEETING.</p>
             <ul
               id="onlineUsers"
               class="mt-2 flex flex-col items-center gap-2 border-t pt-3">
