@@ -2,7 +2,7 @@ import './style.css';
 
 const loginScreen = document.getElementById('loginScreen');
 const usernameInput = document.getElementById('username') as HTMLInputElement;
-const joinBtn = document.getElementById('joinBtn');
+const joinForm = document.getElementById('joinForm');
 const loginError = document.getElementById('loginError');
 
 const callScreen = document.getElementById('callScreen');
@@ -109,6 +109,9 @@ function handleLogin(success: boolean, msg: string) {
     loginScreen!.style.display = 'none';
     callScreen!.style.display = 'flex';
 
+    document.getElementById('loggedProfile')!.textContent = name[0];
+    document.getElementById('loggedUserSignal')!.style.display = 'flex';
+
     (navigator as any).webkitGetUserMedia(
       { video: false, audio: true },
       (myStream: any) => {
@@ -149,7 +152,23 @@ function handleLogin(success: boolean, msg: string) {
   }
 }
 
-joinBtn?.addEventListener('click', (_) => {
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: '2-digit',
+  weekday: 'short',
+});
+const timeFormat = new Intl.DateTimeFormat('en-US', {
+  hour12: true,
+  hour: '2-digit',
+  minute: '2-digit',
+});
+
+document.getElementById('time')!.textContent = `${timeFormat.format(
+  Date.now()
+)} • ${dateFormat.format(Date.now())}`;
+
+joinForm?.addEventListener('click', (e) => {
+  e.preventDefault();
   name = usernameInput.value.trim();
   if (!name) return;
   sendWS(types.LOGIN, {

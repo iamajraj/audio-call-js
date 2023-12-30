@@ -7,57 +7,68 @@
     <script type="module" src="/src/main.ts" defer></script>
   </head>
   <body>
-    <div
-      class="h-full w-full flex items-center justify-center bg-gradient-to-b to-pink-700 from-indigo-800">
-      <div class="shadow-lg rounded-lg bg-white/30 backdrop-blur-3xl">
-        <div
-          class="p-10 flex flex-col justify-center items-center h-full"
-          id="loginScreen">
-          <p class="not-italic text-2xl text-white">
-            Login to do the Audio Call
-          </p>
+    <div class="h-full w-full flex flex-col">
+      <div class="w-full flex items-center justify-between px-10 py-5">
+        <span class="text-2xl text-gray-600">
+          <span class="font-medium">Troggle</span>
+          <span class="relative"
+            >Meet
+            <p class="font-bold text-[11px] absolute -top-4 right-0">
+              audio
+            </p></span
+          >
+        </span>
+        <div class="flex items-center justify-center gap-5">
+          <div id="loggedUserSignal" class="online-signal hidden"></div>
+          <p id="time" class="text-lg"></p>
+          <p
+            class="flex items-center justify-center uppercase rounded-full w-8 h-8 border cursor-pointer"
+            id="loggedProfile"></p>
+        </div>
+      </div>
+      <div class="ml-44 w-max flex-col mt-52 hidden" id="loginScreen">
+        <h1 class="text-4xl leading-[50px]">
+          Premium audio meetings.<br />Now free for everyone
+        </h1>
+        <p class="text-sm text-gray-600 mt-4">
+          We re-engineered the service we built for secure business<br />
+          call, Troogle Meet, to make it free and available for all.
+        </p>
+        <form id="joinForm" class="flex items-center gap-2 border-b pb-5">
           <input
             id="username"
             type="text"
             placeholder="Enter a username"
-            class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
+            class="mt-5 focus:outline-none border border-gray-300 px-4 p-2 placeholder:text-gray-600" />
           <p id="loginError" class="text-red-500 text-sm py-2"></p>
           <button
-            id="joinBtn"
-            class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
+            type="submit"
+            class="mt-4 px-4 py-2 rounded-lg bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
             Login
           </button>
-        </div>
-        <div class="p-10 hidden gap-10 h-full" id="callScreen">
-          <div class="flex flex-col justify-center items-center">
-            <p class="not-italic text-2xl text-white">
-              You can now do Audio Calls
-            </p>
-            <div class="gap-5 mt-5">
-              <div class="flex flex-col items-center gap-2">
-                <p class="text-white font-bold text-sm">You</p>
-                <audio autoplay controls id="localAudio"></audio>
-              </div>
-              <div class="flex flex-col items-center gap-2 mt-5">
-                <p class="text-white font-bold text-sm">Remote</p>
-                <audio autoplay controls id="remoteAudio"></audio>
-              </div>
-            </div>
-            <div class="flex items-center gap-4 mt-5">
-              <input
-                id="remoteUsername"
-                type="text"
-                placeholder="Enter the user username"
-                class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
-              <button
-                id="callBtn"
-                class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
-                Call
-              </button>
+        </form>
+        <p class="mt-4 text-gray-500 text-sm">
+          <span class="text-blue-600 cursor-pointer">Learn more</span> about
+          Troggle Meet
+        </p>
+      </div>
+
+      <!-- Call Screen -->
+      <div class="px-20 pt-10 pb-32 flex flex-col gap-5 h-full" id="callScreen">
+        <div class="flex gap-10 flex-1">
+          <div class="flex w-[80%]">
+            <audio autoplay controls id="localAudio" hidden></audio>
+            <audio autoplay controls id="remoteAudio" hidden></audio>
+            <div
+              class="w-full border-2 rounded-lg flex items-center justify-center">
+              <p
+                class="w-32 h-32 rounded-full border-2 flex items-center justify-center text-4xl">
+                A
+              </p>
             </div>
           </div>
-          <div>
-            <p class="text-white">Online users.</p>
+          <div class="w-[20%] flex flex-col border-2 rounded-lg p-4">
+            <p>Active.</p>
             <ul
               id="onlineUsers"
               class="mt-2 flex flex-col items-center gap-2 border-t pt-3">
@@ -67,6 +78,19 @@
               </li>
             </ul>
           </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-4 mt-5">
+          <input
+            id="remoteUsername"
+            type="text"
+            placeholder="Enter the user username"
+            class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
+          <button
+            id="callBtn"
+            class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
+            Call
+          </button>
         </div>
       </div>
     </div>
