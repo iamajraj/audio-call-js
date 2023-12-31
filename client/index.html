@@ -26,7 +26,7 @@
             id="loggedProfile"></p>
         </div>
       </div>
-      <div class="ml-44 w-max hidden flex-col mt-52" id="loginScreen">
+      <div class="ml-44 w-max flex flex-col mt-52" id="loginScreen">
         <h1 class="text-4xl leading-[50px]">
           Premium audio meetings.<br />Now free for everyone
         </h1>
@@ -38,6 +38,7 @@
           <input
             id="username"
             type="text"
+            autocomplete="off"
             placeholder="Enter a username"
             class="mt-5 focus:outline-none border border-gray-300 px-4 p-2 placeholder:text-gray-600" />
           <p id="loginError" class="text-red-500 text-sm py-2"></p>
@@ -54,7 +55,9 @@
       </div>
 
       <!-- Call Screen -->
-      <div class="px-20 pt-10 pb-32 flex flex-col gap-5 h-full" id="callScreen">
+      <div
+        class="px-20 pt-10 pb-32 hidden flex-col gap-5 h-full"
+        id="callScreen">
         <div class="flex gap-10 flex-1">
           <div
             class="flex gap-10 w-[80%] border-2 rounded-lg items-center justify-center">
@@ -69,6 +72,7 @@
             <div
               class="flex flex-col border-[4px] p-10 rounded-lg gap-4 items-center justify-center">
               <p
+                id="remoteUserText"
                 class="w-32 h-32 rounded-full flex items-center justify-center border-2">
                 Remote
               </p>
@@ -85,7 +89,7 @@
             </div> -->
           </div>
           <div class="w-[20%] flex flex-col border-2 rounded-lg p-4">
-            <p>IN MEETING.</p>
+            <p>Online Users.</p>
             <ul
               id="onlineUsers"
               class="mt-2 flex flex-col items-center gap-2 border-t pt-3">
@@ -101,12 +105,18 @@
           <input
             id="remoteUsername"
             type="text"
+            autocomplete="off"
             placeholder="Enter the user username"
             class="mt-5 focus:outline-none border rounded-lg px-4 p-2" />
           <button
             id="callBtn"
             class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all">
             Call
+          </button>
+          <button
+            id="hangUpBtn"
+            class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-all hidden">
+            Hang Up
           </button>
         </div>
       </div>

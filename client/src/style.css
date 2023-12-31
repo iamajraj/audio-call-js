@@ -7,7 +7,7 @@
     @apply w-3 h-3 rounded-full bg-green-400 relative before:absolute before:inset-0 before:animate-ping before:bg-green-400 before:rounded-full;
   }
   .online-users-wrapper {
-    @apply text-white w-full flex items-center gap-2;
+    @apply w-full flex items-center gap-2;
   }
 }
 

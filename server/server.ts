@@ -99,6 +99,12 @@ wss.on('connection', (socket: ExtendedWebSocket) => {
     if (socket.name) {
       delete users[socket.name];
 
+      Object.values(users).forEach((user) => {
+        sendWS(user, types.ACTIVE_USERS, {
+          users: Object.keys(users),
+        });
+      });
+
       if (socket.otherName) {
         console.log('Disconnecting from ', socket.otherName);
         const otherSocket = users[socket.otherName];

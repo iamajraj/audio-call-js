@@ -14,6 +14,8 @@ const remoteUsernameInput = document.getElementById(
 const localAudio = document.getElementById('localAudio') as HTMLAudioElement;
 const remoteAudio = document.getElementById('remoteAudio') as HTMLAudioElement;
 
+const remoteUserText = document.getElementById('remoteUserText');
+
 const onlineUsersContainer = document.getElementById('onlineUsers');
 
 const ws = new WebSocket('ws://192.168.0.112:8080');
@@ -195,6 +197,9 @@ callBtn?.addEventListener('click', () => {
   if (!remoteUsernameInput.value.trim()) return;
 
   connectedUser = remoteUsernameInput.value.trim();
+  remoteUserText!.textContent = connectedUser;
+  hangUpBtn!.style.display = 'inline-block';
+
   yourConn.createOffer(
     (offer: any) => {
       sendWS(types.OFFER, {
@@ -241,7 +246,9 @@ hangUpBtn?.addEventListener('click', () => {
 
 function handleLeave() {
   connectedUser = null;
+  remoteUserText!.textContent = 'Remote';
   (remoteAudio as any).src = null;
+  hangUpBtn!.style.display = 'hidden';
 
   yourConn.close();
   yourConn.onicecandidate = null;
